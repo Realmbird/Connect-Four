@@ -1,31 +1,44 @@
 require_relative '../lib/Board'
 describe Board do
-  describe '#set' do
-  end
+  
   describe '#add' do
+    it "adds to lowest column" do
+      board = Board.new
+      board.add(0,"\u26AA")
+      expect(board.board[0,5] == "\u26AA")
+    end
+    it "only one row" do
+      board = Board.new
+      board.add(0,"\u26AA")
+      expect(board.board[0,4] != "\u26AA")
+    end
   end
   describe '#checkCol' do
     it 'does not give false value' do
       board = Board.new
-      expect(board.checkCol).to eql(false)
+      board.checkCol
+      expect(board.win).to eql(false)
     end
   end
   describe '#checkRow' do
     it 'does not give false value' do
       board = Board.new
-      expect(board.checkRow).to eql(false)
+      board.checkRow
+      expect(board.win).to eql(false)
     end
   end
   describe '#checkRight' do
     it 'does not give false value' do
       board = Board.new
-      expect(board.checkRight).to eql(false)
+      board.checkRight
+      expect(board.win).to eql(false)
     end
   end
   describe '#checkLeft' do
     it 'does not give false value' do
       board = Board.new
-      expect(board.checkLeft).to eql(false)
+      board.checkLeft
+      expect(board.win).to eql(false)
     end
   end
 end

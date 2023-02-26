@@ -1,4 +1,4 @@
-require_relative './lib/Connect.rb'
+require_relative './lib/connect.rb'
 def main
   loop do
     connect = Connect.new 

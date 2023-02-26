@@ -5,8 +5,7 @@ class Board
   attr_accessor :board, :win
 
   def initialize
-    @board = Array.new(6)
-    generateBoard
+    @board = Array.new(6) { Array.new(7, blank) }
     @win = false
   end
 
@@ -31,17 +30,18 @@ class Board
       puts 'Invalid input try again'
       puts "Enter Col Player #{value}"
       ncol = gets.chomp.to_i
-      set(ncol, value)
+      col = ncol - 1
+      set(col, value)
     end
   end
 
   def add(col, value, row = 5)
-    if @board[row][col] == blank
+    if @board[row][col].nil?
+      false
+    elsif @board[row][col] == blank
       @board[row][col] = value
       true
     else
-      return false if @board[row - 1][col] != ni
-
       add(col, value, row - 1)
     end
   end
@@ -54,16 +54,17 @@ class Board
   end
 
   def checkCol
-    for i in 0..6 do
+    # each collumn
+    for col in 0..6 do
 
       columns = []
 
-      @board.each  do |row|
-        columns[i] = row[i]
+      @board.each do |row|
+        columns[col] = row[col]
       end
 
       columns.each_cons(4) do |colGroup|
-        @win = true if colGroup[0] != blank && colGroup.uniq.length == 1
+        @win = true if !colGroup[0].nil? && colGroup.uniq.length == 1
       end
 
     end
